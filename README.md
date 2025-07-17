@@ -1,4 +1,3 @@
-# infonoc
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -80,7 +79,10 @@
                 { title: 'Senha (ZTE)', value: 'multipro', copy: true },
                 { title: 'IP Nokia', value: '192.168.1.254', copy: true },
                 { title: 'Login (Nokia)', value: 'AdminGPON', copy: true },
-                { title: 'Senhas (Nokia)', value: '4d0r41ou / ALC#FGU', copy: false }
+                { title: 'Senhas (Nokia)', value: '4d0r41ou / ALC#FGU', copy: false },
+                { title: 'IP Huawei', value: '192.168.18.1', copy: true },
+                { title: 'Usuário (Huawei)', value: 'Epadmin', copy: true },
+                { title: 'Senha (Huawei)', value: 'adminEp', copy: true }
             ],
             steps: [
                 {
@@ -266,3 +268,4 @@
     </script>
 </body>
 </html>
+
