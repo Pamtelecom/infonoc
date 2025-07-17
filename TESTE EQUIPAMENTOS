@@ -30,6 +30,21 @@
             text-decoration: line-through;
             color: #6b7280;
         }
+        .image-placeholder {
+            width: 100%;
+            height: 200px; /* Adjust height as needed */
+            background-color: #e2e8f0; /* bg-slate-200 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b; /* text-slate-500 */
+            font-size: 0.875rem; /* text-sm */
+            text-align: center;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            border: 1px dashed #94a3b8; /* border-slate-400 */
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
@@ -79,7 +94,10 @@
                 { title: 'Senha (ZTE)', value: 'multipro', copy: true },
                 { title: 'IP Nokia', value: '192.168.1.254', copy: true },
                 { title: 'Login (Nokia)', value: 'AdminGPON', copy: true },
-                { title: 'Senhas (Nokia)', value: '4d0r41ou / ALC#FGU', copy: false }
+                { title: 'Senhas (Nokia)', value: '4d0r41ou / ALC#FGU', copy: false },
+                { title: 'IP Huawei', value: '192.168.18.1', copy: true },
+                { title: 'Usuário (Huawei)', value: 'Epadmin', copy: true },
+                { title: 'Senha (Huawei)', value: 'adminEp', copy: true }
             ],
             steps: [
                 {
@@ -97,6 +115,10 @@
                         { id: 'task2_2', text: 'Navegar até "Status" > "Device Information" para verificar a "Software Version".' },
                         { id: 'task2_3', text: 'Se for um GW24 com versão antiga, ir para "Administration" > "Soft Update".' },
                         { id: 'task2_4', text: "Buscar o arquivo de atualização (Versão 8) e clicar em 'Upgrade'." },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Status+e+Informações+do+Dispositivo", alt: "Tela de Status e Informações do Dispositivo (GW24AC)" },
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Administração+e+Atualização+de+Software", alt: "Tela de Administração e Atualização de Software (GW24AC)" }
                     ]
                 },
                 {
@@ -108,6 +130,9 @@
                         { id: 'task3_3', text: "Configurar a VLAN `556` ou `190`." },
                         { id: 'task3_4', text: "Salvar as configurações no IXC." },
                         { id: 'task3_5', text: "Autorizar a ONU no sistema." },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Provisionamento+no+IXC", alt: "Tela de Provisionamento de Cliente no IXC" }
                     ]
                 },
                 {
@@ -115,10 +140,13 @@
                     description: "Após o provisionamento, verifique o sinal da ONU para garantir a qualidade e estabilidade da conexão física.",
                     tasks: [
                         { id: 'task4_1', text: "Verificar o relatório de 'Potência de ONU' no sistema." }
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Relatório+de+Potência+da+ONU", alt: "Relatório de Potência da ONU no IXC" }
                     ]
                 },
                 {
-                    title: "5. Configuração PPPoE no Equipamento",
+                    title: "5. Configuração PPPoE no Equipamento (GW24/Nokia)",
                     description: "A configuração PPPoE deve ser realizada dentro da interface do próprio equipamento, seguindo o padrão da OLT Nokia.",
                     tasks: [
                         { id: 'task5_1', text: 'Navegar até a aba "Network" e selecionar "WAN Connection".' },
@@ -126,33 +154,82 @@
                         { id: 'task5_3', text: "Associar todas as portas LAN necessárias em 'Port Binding'." },
                         { id: 'task5_4', text: 'Configurar a "VLAN ID" `556` e "VLAN Type" como `Tag`.' },
                         { id: 'task5_5', text: "Inserir o 'Username' (`teste_teste`) e 'Password' (`conecte123`) conforme configurado no IXC." },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Configuração+PPPoE+no+GW24", alt: "Tela de Configuração WAN Connection (GW24AC)" }
                     ]
                 },
                 {
-                    title: "6. Configuração do Wi-Fi para Teste",
-                    description: "Configure a rede Wi-Fi para realizar os testes de conectividade sem fio.",
+                    title: "6. Configuração PPPoE no Equipamento (ZTE)",
+                    description: "Para equipamentos ZTE, siga estas etapas para configurar a conexão PPPoE.",
                     tasks: [
-                        { id: 'task6_1', text: "Habilitar o Wireless RF e o SSID desejado (ex: 5G)." },
-                        { id: 'task6_2', text: "Definir um nome para a rede (SSID Name)." },
-                        { id: 'task6_3', text: "Selecionar o tipo de autenticação (ex: WPA/WPA2-PSK)." },
-                        { id: 'task6_4', text: "Definir uma senha para a rede Wi-Fi." },
+                        { id: 'task6_1', text: 'No ZTE, selecionar "Tipo de Transferência PPP" como `PPPoE`.' },
+                        { id: 'task6_2', text: 'Inserir "Usuário" (`teste_w`) e "Senha" (`*****`).' },
+                        { id: 'task6_3', text: 'Definir "Tipo de Autenticação" como `Auto` e "Modo de conexão" como `Sempre ligado`.' },
+                        { id: 'task6_4', text: 'Verificar se "NAT" está `Ligado`.' },
+                        { id: 'task6_5', text: 'Configurar a "VLAN ID" `556`.' },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Configuração+PPPoE+no+ZTE", alt: "Tela de Configuração PPPoE no ZTE" }
                     ]
                 },
                 {
-                    title: "7. Verificação de Conectividade e Testes de Velocidade",
+                    title: "7. Configuração do Wi-Fi para Teste (GW24)",
+                    description: "Configure a rede Wi-Fi para realizar os testes de conectividade sem fio no equipamento GW24.",
+                    tasks: [
+                        { id: 'task7_1', text: "Habilitar o Wireless RF e o SSID desejado (ex: 5G)." },
+                        { id: 'task7_2', text: "Definir um nome para a rede (SSID Name)." },
+                        { id: 'task7_3', text: "Selecionar o tipo de autenticação (ex: WPA/WPA2-PSK)." },
+                        { id: 'task7_4', text: "Definir uma senha para a rede Wi-Fi." },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Configuração+Wi-Fi+no+GW24", alt: "Tela de Configuração 5G Basic Setting (GW24AC)" }
+                    ]
+                },
+                {
+                    title: "8. Configuração do Wi-Fi para Teste (ZTE)",
+                    description: "Configure a rede Wi-Fi para realizar os testes de conectividade sem fio no equipamento ZTE.",
+                    tasks: [
+                        { id: 'task8_1', text: 'No ZTE, definir o "Nome SSID" e o "Tipo de encriptação" (ex: WPA2-PSK-AES).' },
+                        { id: 'task8_2', text: 'Inserir a "Senha WPA".' },
+                        { id: 'task8_3', text: 'Verificar as configurações para 2.4GHz e 5GHz.' },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Configuração+Wi-Fi+no+ZTE", alt: "Tela de Configuração Wi-Fi no ZTE" }
+                    ]
+                },
+                {
+                    title: "9. Verificação de Conectividade e Testes de Velocidade",
                     description: "Com tudo configurado, verifique se o cliente está online no IXC e realize testes de velocidade para validar a performance.",
                     tasks: [
-                        { id: 'task7_1', text: "Verificar se o cliente aparece online no IXC (IP e MAC devem ser exibidos)." },
-                        { id: 'task7_2', text: "Conectar um dispositivo via cabo de rede e testar a velocidade." },
-                        { id: 'task7_3', text: "Conectar um dispositivo via Wi-Fi e testar a velocidade." },
+                        { id: 'task9_1', text: "Verificar se o cliente aparece online no IXC (IP e MAC devem ser exibidos)." },
+                        { id: 'task9_2', text: "Conectar um dispositivo via cabo de rede e testar a velocidade." },
+                        { id: 'task9_3', text: "Conectar um dispositivo via Wi-Fi e testar a velocidade." },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Cliente+Online+no+IXC", alt: "Tela de Login no IXC com status ONU Online" }
                     ]
                 },
                 {
-                    title: "8. Reiniciar e Resetar Equipamentos",
+                    title: "10. Reiniciar e Resetar Equipamentos (GW24/Nokia)",
                     description: "Como passo final, é recomendável reiniciar o equipamento para aplicar todas as configurações. O reset de fábrica só deve ser usado se necessário.",
                     tasks: [
-                        { id: 'task8_1', text: 'Reiniciar o equipamento via "Administration" > "System Management" > "Reboot".' },
-                        { id: 'task8_2', text: 'Se necessário, resetar para as configurações de fábrica via "Factory reset".' },
+                        { id: 'task10_1', text: 'Reiniciar o equipamento via "Administration" > "System Management" > "Reboot".' },
+                        { id: 'task10_2', text: 'Se necessário, resetar para as configurações de fábrica via "Factory reset".' },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Reiniciar+e+Resetar+GW24", alt: "Tela de System Management (GW24AC)" }
+                    ]
+                },
+                {
+                    title: "11. Reiniciar e Resetar Equipamentos (ZTE)",
+                    description: "Para o ZTE, siga estas opções para reiniciar ou restaurar as configurações de fábrica.",
+                    tasks: [
+                        { id: 'task11_1', text: 'Reiniciar o dispositivo ZTE via "Gerência & Diagnóstico" > "Gerenciamento de dispositivo" > "Reiniciar".' },
+                        { id: 'task11_2', text: 'Se necessário, restaurar as configurações de fábrica via "Gerenciamento de redefinição de fábrica" > "Restauração de fábrica".' },
+                    ],
+                    images: [
+                        { src: "https://placehold.co/600x300/e2e8f0/64748b?text=Imagem:+Reiniciar+e+Resetar+ZTE", alt: "Tela de Gerenciamento de Dispositivo (ZTE)" }
                     ]
                 }
             ]
@@ -224,6 +301,15 @@
                 });
                 tasksHtml += '</ul>';
 
+                let imagesHtml = '';
+                if (step.images) {
+                    step.images.forEach(image => {
+                        imagesHtml += `<div class="image-placeholder">${image.alt}</div>`;
+                        // If you had actual image URLs, you would use:
+                        // imagesHtml += `<img src="${image.src}" alt="${image.alt}" class="w-full h-auto rounded-lg my-4 shadow-sm">`;
+                    });
+                }
+
                 details.innerHTML = `
                     <summary class="p-4 sm:p-6 cursor-pointer flex justify-between items-center bg-slate-50 hover:bg-slate-100 border-b border-slate-200">
                         <div class="flex items-center">
@@ -236,6 +322,7 @@
                     </summary>
                     <div class="p-4 sm:p-6">
                         <p class="text-slate-600 mb-6">${step.description}</p>
+                        ${imagesHtml}
                         ${tasksHtml}
                     </div>
                 `;
@@ -265,3 +352,4 @@
     </script>
 </body>
 </html>
+
